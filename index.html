@@ -3,42 +3,170 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Anyebin Portfolio</title>
+
     <link rel="stylesheet" href="style.css" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
       rel="stylesheet"
     />
+
     <link
       rel="stylesheet"
-      as="style"
-      crossorigin
       href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
     />
   </head>
+
   <body>
+    <!-- 첫 화면 -->
     <section class="first-screen">
-      <h1 class="typewriter">Anyebin portfolio..</h1>
-      <button>Press button</button>
+      <h1 class="typewriter">Anyebin Portfolio...</h1>
+      <button id="start-btn">Press Button</button>
     </section>
-    <main>
-      <section id="about">
-        <h2 class="section-title">
-          <span class="section-number">01. </span>about me
-        </h2>
-      </section>
-      <section id="skills">
-        <h2 class="section-title">
-          <span class="section-number">02. </span>skills
-        </h2>
-      </section>
-      <section id="contact">
-        <h2 class="section-title">
-          <span class="section-number">03. </span>contact
-        </h2>
-      </section>
-    </main>
+
+    <div class="portfolio hidden">
+      <header>
+        <div class="header-inner">
+          <div class="logo">Anyebin Portfolio_</div>
+
+          <nav class="navbar">
+            <ul class="menu">
+              <li><a href="#about">about me</a></li>
+              <li><a href="#skills">skills</a></li>
+              <li><a href="#contact">contact</a></li>
+            </ul>
+          </nav>
+        </div>
+      </header>
+
+      <main>
+        <!-- About -->
+        <section id="about" class="content-section">
+          <details class="section" open>
+            <summary class="section-title">
+              <span class="section-number">01.</span>
+              about me
+            </summary>
+
+            <div class="about-item">
+              <span class="label">Name</span>
+              <span class="value">안예빈</span>
+            </div>
+
+            <div class="about-item">
+              <span class="label">Role</span>
+              <span class="value">Frontend Developer</span>
+            </div>
+
+            <div class="about-item">
+              <span class="label">Education</span>
+              <span class="value">전북대학교 전자공학과</span>
+            </div>
+
+            <div class="about-item">
+              <span class="label">Training</span>
+              <span class="value">멀티캠퍼스 프론트엔드 부트캠프</span>
+            </div>
+
+            <div class="about-item">
+              <span class="label">Experience</span>
+              <span class="value">코리아런드리 인턴</span>
+            </div>
+          </details>
+        </section>
+
+        <!-- Skills -->
+        <section id="skills" class="content-section">
+          <details class="section" open>
+            <summary class="section-title">
+              <span class="section-number">02.</span>
+              skills
+            </summary>
+
+            <div class="skills-grid">
+              <article class="skill-card">
+                <h3>⚛ React</h3>
+                <ul>
+                  <li>컴포넌트 기반 UI 설계 및 재사용</li>
+                  <li>Zustand를 활용한 전역 상태 관리</li>
+                  <li>TanStack Query 서버 상태 관리 및 캐싱</li>
+                </ul>
+              </article>
+
+              <article class="skill-card">
+                <h3>▲ Next.js</h3>
+                <ul>
+                  <li>App Router 기반 페이지 구조 설계</li>
+                  <li>SSR · SSG 최적화</li>
+                  <li>동적 라우팅 및 데이터 패칭 구현</li>
+                </ul>
+              </article>
+
+              <article class="skill-card">
+                <h3>☁ Deployment</h3>
+                <ul>
+                  <li>AWS(EC2, RDS, CloudFront) 구축</li>
+                  <li>GitHub Actions 기반 CI/CD</li>
+                  <li>서비스 배포 경험</li>
+                </ul>
+              </article>
+
+              <article class="skill-card">
+                <h3>🎨 UI</h3>
+                <ul>
+                  <li>Tailwind CSS 반응형 UI 구현</li>
+                  <li>MUI 컴포넌트 커스터마이징</li>
+                  <li>사용자 경험을 고려한 화면 설계</li>
+                </ul>
+              </article>
+
+              <article class="skill-card">
+                <h3>⚙ Backend</h3>
+                <ul>
+                  <li>Express 기반 REST API 개발</li>
+                  <li>MySQL 연동 및 DB 모델링</li>
+                  <li>클라이언트–서버 통신 구조 이해</li>
+                </ul>
+              </article>
+            </div>
+          </details>
+        </section>
+
+        <!-- Contact -->
+        <section id="contact" class="content-section">
+          <details class="section" open>
+            <summary class="section-title">
+              <span class="section-number">03.</span>
+              contact
+            </summary>
+
+            <div class="contact-item">
+              <span class="label">Email</span>
+              <span class="value">aybin0108@gmail.com</span>
+            </div>
+            <div class="contact-item">
+              <span class="label">GitHub</span>
+              <a
+                class="value"
+                href="https://github.com/mewmaze"
+                target="_blank"
+              >
+                github.com/mewmaze
+              </a>
+            </div>
+            <a href="mailto:aybin0108@gmail.com" class="contact-btn">
+              SEND MAIL
+            </a>
+          </details>
+        </section>
+      </main>
+
+      <footer class="footer">© 2026 Anyebin All Rights Reserved.</footer>
+    </div>
+
+    <script src="script.js"></script>
   </body>
 </html>
