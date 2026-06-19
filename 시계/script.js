@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   // 시간을 AM/PM 으로 변경
-  function convertTo12HourHtml(timeStr, isForList = false) {
+  function convertTo12Hour(timeStr, isForList = false) {
     const [partsHour, partsMin, partsSec] = timeStr.split(":");
     let hourInt = parseInt(partsHour);
     const ampmText = hourInt >= 12 ? "PM" : "AM";
@@ -51,7 +51,6 @@ document.addEventListener("DOMContentLoaded", () => {
     renderAlarms();
   }
 
-  // 3. UI 렌더링 함수 로직 분리
   function renderBatteryUI() {
     batteryText.textContent = `${clockState.batteryLeft}%`;
     batteryBar.style.width = `${clockState.batteryLeft}%`;
@@ -84,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const item = document.createElement("div");
       item.className = `alarm-item ${alarm.triggered ? "triggered" : ""}`;
 
-      const displayHtml = convertTo12HourHtml(alarm.time, true);
+      const displayHtml = convertTo12Hour(alarm.time, true);
 
       item.innerHTML = `
         <div class="alarm-item-left">
@@ -189,7 +188,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const seconds = String(now.getSeconds()).padStart(2, "0");
     const currentTimeStr = `${hours}:${minutes}:${seconds}`;
 
-    clockString.innerHTML = convertTo12HourHtml(currentTimeStr);
+    clockString.innerHTML = convertTo12Hour(currentTimeStr);
 
     if (clockState.batteryLeft <= 0) {
       clockBox.classList.add("blackout");
