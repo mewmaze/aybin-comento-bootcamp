@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Clock</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+  </head>
+  <body>
+    <main class="bg-area">
+      <div class="main-box">
+        <!-- <header class="main-header">
+          <div class="logo">My Clock</div>
+        </header> -->
+
+        <div class="main-content">
+          <div class="left-content">
+            <div class="clock-screen">
+              <div class="date-text-large" id="date-string">2026-06-19 FRI</div>
+              <div class="clock-box" id="clock-box-area">
+                <div class="time-text" id="clock-string">PM 06:45:00</div>
+              </div>
+              <!-- <div class="bottom-text">
+                <i class="fa-regular fa-clock"></i> Have a nice day! 😊
+              </div> -->
+            </div>
+
+            <div class="alarm-input-area">
+              <div class="title-text">알람 추가</div>
+              <div class="alarm-inputs">
+                <div class="ampm-container">
+                  <div class="group-label">구분</div>
+                  <div class="ampm-btn-group-vertical">
+                    <button
+                      type="button"
+                      class="ampm-toggle-btn active"
+                      data-value="AM"
+                    >
+                      AM
+                    </button>
+                    <button
+                      type="button"
+                      class="ampm-toggle-btn"
+                      data-value="PM"
+                    >
+                      PM
+                    </button>
+                  </div>
+                </div>
+
+                <div class="time-group">
+                  <div class="group-label">시</div>
+                  <div class="digit-pair">
+                    <select id="hour-10" class="num-select"></select>
+                    <select id="hour-1" class="num-select"></select>
+                  </div>
+                </div>
+
+                <span class="center-colon">:</span>
+
+                <div class="time-group">
+                  <div class="group-label">분</div>
+                  <div class="digit-pair">
+                    <select id="min-10" class="num-select"></select>
+                    <select id="min-1" class="num-select"></select>
+                  </div>
+                </div>
+
+                <span class="center-colon">:</span>
+
+                <div class="time-group">
+                  <div class="group-label">초</div>
+                  <div class="digit-pair">
+                    <select id="sec-10" class="num-select"></select>
+                    <select id="sec-1" class="num-select"></select>
+                  </div>
+                </div>
+
+                <button class="add-btn" id="add-alarm-btn">
+                  <i class="fa-solid fa-plus"></i> 알람 등록
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="right-content">
+            <div class="battery-area">
+              <div class="battery-status">
+                <div class="battery-shape">
+                  <div class="battery-inside" id="battery-bar"></div>
+                </div>
+                <span class="battery-percent" id="battery-text">100%</span>
+              </div>
+              <div class="btn-wrap">
+                <button class="charge-btn" id="charge-btn">
+                  <i class="fa-solid fa-bolt"></i> 충전하기
+                </button>
+              </div>
+            </div>
+
+            <div class="alarm-list-area">
+              <div class="title-text">
+                알람 목록 <span class="sub-text">(최대 3개)</span>
+              </div>
+              <div class="alarm-list" id="alarm-list-container"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
