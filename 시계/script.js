@@ -110,6 +110,7 @@ document.addEventListener("DOMContentLoaded", () => {
   function decreaseBattery() {
     setBattery(clockState.batteryLeft - 1);
   }
+
   function handleCharge() {
     batteryBar.style.transition = "none";
     setBattery(100);
