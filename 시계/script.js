@@ -39,18 +39,6 @@ document.addEventListener("DOMContentLoaded", () => {
     return `<span class="${className}">${ampmText}</span>${finalHourStr}:${partsMin}:${partsSec}`;
   }
 
-  function updateBattery(value) {
-    clockState.batteryLeft = Math.max(0, value);
-    renderBatteryUI();
-  }
-
-  function resetState() {
-    clockState.batteryLeft = 100;
-    clockState.alarms.forEach((alarm) => (alarm.triggered = false));
-    renderBatteryUI();
-    renderAlarms();
-  }
-
   function renderBatteryUI() {
     batteryText.textContent = `${clockState.batteryLeft}%`;
     batteryBar.style.width = `${clockState.batteryLeft}%`;
@@ -114,8 +102,21 @@ document.addEventListener("DOMContentLoaded", () => {
     renderAlarms();
   }
 
+  function setBattery(value) {
+    clockState.batteryLeft = Math.max(0, Math.min(100, value));
+    renderBatteryUI();
+  }
+
+  function decreaseBattery() {
+    setBattery(clockState.batteryLeft - 1);
+  }
   function handleCharge() {
-    resetState();
+    batteryBar.style.transition = "none";
+    setBattery(100);
+
+    requestAnimationFrame(() => {
+      batteryBar.style.transition = "width 0.5s";
+    });
   }
 
   function handleAddAlarm() {
@@ -210,7 +211,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   setInterval(() => {
     if (clockState.batteryLeft > 0) {
-      updateBattery(clockState.batteryLeft - 1);
+      decreaseBattery();
     }
   }, 1000);
 
