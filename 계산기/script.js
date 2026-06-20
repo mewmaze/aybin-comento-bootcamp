@@ -4,6 +4,7 @@ const calculatorState = {
   history: [],
   isHistoryMode: false,
   currentHistoryIndex: 0,
+  isResultDisplayed: false,
 };
 
 const calculator = document.getElementById("calculator");
@@ -19,6 +20,7 @@ function resetState() {
   calculatorState.currentExpression = "";
   calculatorState.isHistoryMode = false;
   calculatorState.currentHistoryIndex = 0;
+  calculatorState.isResultDisplayed = false;
 
   if (historyBtn) historyBtn.classList.remove("history-active");
   if (modeIndicator) modeIndicator.innerText = "● 계산 모드";
@@ -40,11 +42,6 @@ function isValidSequence(nextChar) {
     if (lastToken.includes(".")) return false;
   }
 
-  if (/[+\-*/%]/.test(nextChar)) {
-    if (expr === "" || lastChar === "(" || lastChar === ".") return false;
-    if (/[+\-*/%]/.test(lastChar)) return false;
-  }
-
   if (nextChar === "(") {
     if (lastChar === ".") return false;
     if (/[0-9)]$/.test(lastChar)) return false;
@@ -64,6 +61,10 @@ function isValidSequence(nextChar) {
 function inputNumber(num) {
   if (!calculatorState.isPowerOn) return;
   if (calculatorState.isHistoryMode) exitHistoryMode();
+  if (calculatorState.isResultDisplayed) {
+    calculatorState.currentExpression = "";
+    calculatorState.isResultDisplayed = false;
+  }
   if (calculatorState.currentExpression.length >= MAX_LENGTH) return;
   if (calculatorState.currentExpression.slice(-1) === ")") return;
 
@@ -74,6 +75,9 @@ function inputNumber(num) {
 function inputOperator(op) {
   if (!calculatorState.isPowerOn) return;
   if (calculatorState.isHistoryMode) exitHistoryMode();
+  if (calculatorState.isResultDisplayed) {
+    calculatorState.isResultDisplayed = false;
+  }
   if (!isValidSequence(op)) return;
 
   calculatorState.currentExpression += op;
@@ -83,6 +87,9 @@ function inputOperator(op) {
 function inputBracket(bracket) {
   if (!calculatorState.isPowerOn) return;
   if (calculatorState.isHistoryMode) exitHistoryMode();
+  if (calculatorState.isResultDisplayed) {
+    calculatorState.isResultDisplayed = false;
+  }
   if (!isValidSequence(bracket)) return;
 
   calculatorState.currentExpression += bracket;
@@ -92,6 +99,13 @@ function inputBracket(bracket) {
 function inputDot(dot) {
   if (!calculatorState.isPowerOn) return;
   if (calculatorState.isHistoryMode) exitHistoryMode();
+  if (calculatorState.isResultDisplayed) {
+    calculatorState.currentExpression = "0";
+    calculatorState.isResultDisplayed = false;
+  }
+  if (calculatorState.isResultDisplayed) {
+    calculatorState.isResultDisplayed = false;
+  }
   if (!isValidSequence(dot)) return;
 
   calculatorState.currentExpression += dot;
@@ -101,6 +115,24 @@ function inputDot(dot) {
 function clearEntry() {
   if (!calculatorState.isPowerOn) return;
   resetState();
+}
+
+function backspace() {
+  if (!calculatorState.isPowerOn) return;
+  if (calculatorState.isHistoryMode) exitHistoryMode();
+
+  if (calculatorState.isResultDisplayed) {
+    calculatorState.currentExpression = "";
+    calculatorState.isResultDisplayed = false;
+    updateDisplay();
+    return;
+  }
+
+  let expr = calculatorState.currentExpression;
+  if (expr.length > 0) {
+    calculatorState.currentExpression = expr.slice(0, -1);
+    updateDisplay();
+  }
 }
 
 function calculateResult() {
@@ -121,8 +153,7 @@ function calculateResult() {
   }
 
   try {
-    let formattedExpr = expr.replace(/%/g, "/100");
-    let evalResult = eval(formattedExpr);
+    let evalResult = eval(expr);
 
     if (
       evalResult === undefined ||
@@ -152,6 +183,8 @@ function calculateResult() {
 
     addHistory(calculatorState.currentExpression, displayResult);
     calculatorState.currentExpression = String(displayResult);
+
+    calculatorState.isResultDisplayed = true;
   } catch (error) {
     resultDisplay.innerText = "Error";
   }
