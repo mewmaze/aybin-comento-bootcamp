@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Memo Todo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="notepad">
+        <div class="binder">
+          <span class="binder-label">memo</span>
+          <div class="binder-dots">
+            <span class="binder-dot"></span>
+            <span class="binder-dot"></span>
+            <span class="binder-dot"></span>
+          </div>
+        </div>
+        <div class="paper">
+          <div class="red-line"></div>
+          <div class="nav-bar">
+            <button class="nav-btn" id="prev-btn" aria-label="이전 날">
+              &#9664;
+            </button>
+            <div class="date-info">
+              <span class="date-text" id="disp-date"></span>
+              <span class="day-text" id="disp-day"></span>
+            </div>
+            <button class="nav-btn" id="next-btn" aria-label="다음 날">
+              &#9654;
+            </button>
+          </div>
+
+          <div class="list-area">
+            <ul class="todo-list" id="todo-list" aria-label="할 일 목록"></ul>
+            <div class="ruled-lines" id="ruled-lines" aria-hidden="true"></div>
+          </div>
+          <div class="add-row">
+            <input
+              class="add-input"
+              id="add-input"
+              type="text"
+              placeholder="할 일을 입력하세요"
+              maxlength="40"
+              autocomplete="off"
+            />
+            <button class="add-btn" id="add-btn">+ 추가</button>
+          </div>
+
+          <div class="paper-footer">&#9825;</div>
+        </div>
+        <div class="bottom-bar">
+          <button class="bb-btn" id="bb-postpone">&#128197; 미루기</button>
+          <button class="bb-btn" id="bb-highlight">&#9999;&#65039; 강조</button>
+          <button class="bb-btn" id="bb-delete">&#128465; 삭제</button>
+        </div>
+      </div>
+    </div>
+    <div
+      class="hl-popup hidden"
+      id="hl-popup"
+      role="dialog"
+      aria-label="형광펜 색상 선택"
+    >
+      <button class="hl-dot hl-y" data-hl="hl-y" title="노랑"></button>
+      <button class="hl-dot hl-p" data-hl="hl-p" title="핑크"></button>
+      <button class="hl-dot hl-m" data-hl="hl-m" title="민트"></button>
+      <button class="hl-dot hl-none" data-hl="" title="없음"></button>
+    </div>
+    <div class="toast hidden" id="toast" role="status" aria-live="polite"></div>
+
+    <script src="script.js"></script>
+  </body>
+</html>

@@ -1,0 +1,450 @@
+@import url("https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap");
+
+:root {
+  --color-bg-page: #f0ede6;
+  --color-bg-paper: #fefec0;
+  --color-bg-binder: #2c3e6b;
+  --color-bg-binder-hover: #1e2d52;
+  --color-text-primary: #222;
+  --color-text-muted: #888;
+  --color-text-faint: #bba;
+  --color-text-done: #bbb;
+  --color-text-badge: #999;
+  --color-text-binder: rgba(255, 255, 255, 0.3);
+  --color-text-white: #ffffff;
+  --color-red-line: #f0a0a0;
+  --color-ruled-line: rgba(100, 120, 210, 0.14);
+  --color-border-header: rgba(0, 0, 0, 0.12);
+  --color-border-add: rgba(0, 0, 0, 0.09);
+  --color-border-input: #b8a050;
+  --color-item-hover: rgba(255, 255, 255, 0.42);
+  --color-item-selected: rgba(255, 225, 80, 0.3);
+  --color-cb-border: #aaa;
+  --color-hl-y: rgba(255, 215, 0, 0.52);
+  --color-hl-p: rgba(255, 140, 165, 0.5);
+  --color-hl-m: rgba(100, 210, 170, 0.5);
+  --color-hl-y-dot: rgba(255, 215, 0, 0.85);
+  --color-hl-p-dot: rgba(255, 140, 165, 0.85);
+  --color-hl-m-dot: rgba(100, 210, 170, 0.85);
+  --color-bb-btn-bg: rgba(255, 255, 255, 0.12);
+  --color-bb-btn-border: rgba(255, 255, 255, 0.22);
+  --color-bb-btn-hover: rgba(255, 255, 255, 0.25);
+  --color-bb-btn-active: rgba(255, 255, 255, 0.35);
+  --color-bb-btn-active-border: rgba(255, 255, 255, 0.5);
+  --color-toast-bg: #222;
+  --shadow-notepad:
+    0 8px 28px rgba(0, 0, 0, 0.18), 0 2px 6px rgba(0, 0, 0, 0.1);
+  --shadow-hl-popup: 0 4px 14px rgba(0, 0, 0, 0.14);
+  --item-height: 42px;
+  --red-line-left: 52px;
+  --content-left-pad: 64px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--color-bg-page);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 2.5rem 1rem;
+  font-family: "Nanum Pen Script", cursive;
+}
+
+.wrap {
+  width: 100%;
+  max-width: 440px;
+}
+
+.notepad {
+  border-radius: 4px 4px 6px 6px;
+  box-shadow: var(--shadow-notepad);
+  overflow: hidden;
+}
+
+.binder {
+  background: var(--color-bg-binder);
+  height: 38px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  gap: 10px;
+}
+
+.binder-label {
+  color: var(--color-text-binder);
+  font-size: 11px;
+  font-family: Georgia, serif;
+  font-style: italic;
+  letter-spacing: 3px;
+  flex: 1;
+}
+
+.binder-dots {
+  display: flex;
+  gap: 7px;
+}
+
+.binder-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.paper {
+  background: var(--color-bg-paper);
+  position: relative;
+}
+
+.red-line {
+  position: absolute;
+  left: var(--red-line-left);
+  top: 0;
+  bottom: 0;
+  width: 1.5px;
+  background: var(--color-red-line);
+  opacity: 0.55;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 16px 12px var(--content-left-pad);
+  border-bottom: 1.5px solid var(--color-border-header);
+  position: relative;
+  z-index: 1;
+}
+
+.nav-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  color: var(--color-bg-binder);
+  opacity: 0.55;
+  padding: 4px 6px;
+  border-radius: 3px;
+  line-height: 1;
+  transition: opacity 0.15s;
+}
+
+.nav-btn:hover {
+  opacity: 1;
+}
+
+.date-info {
+  text-align: center;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.date-text {
+  font-size: 21px;
+  color: var(--color-text-primary);
+  letter-spacing: 0.5px;
+}
+
+.day-text {
+  font-size: 16px;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.list-area {
+  position: relative;
+  height: calc(var(--item-height) * 10);
+}
+
+.ruled-lines {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ruled-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--color-ruled-line);
+}
+
+.todo-list {
+  list-style: none;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  padding: 0 14px 0 var(--content-left-pad);
+  height: var(--item-height);
+  gap: 10px;
+  cursor: pointer;
+  transition: background 0.12s;
+  position: relative;
+}
+
+.todo-item:hover {
+  background: var(--color-item-hover);
+}
+
+.todo-item.selected {
+  background: var(--color-item-selected);
+}
+
+.cb {
+  width: 19px;
+  height: 19px;
+  border: 1.5px solid var(--color-cb-border);
+  border-radius: 2px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: white;
+  font-size: 11px;
+  font-family: sans-serif;
+  color: var(--color-text-white);
+  transition: all 0.15s;
+  cursor: pointer;
+}
+
+.cb.checked {
+  background: var(--color-bg-binder);
+  border-color: var(--color-bg-binder);
+}
+
+.item-body {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.todo-text {
+  font-size: 19px;
+  color: var(--color-text-primary);
+  line-height: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: block;
+}
+
+.todo-text.done {
+  text-decoration: line-through;
+  color: var(--color-text-done);
+}
+
+.moved-badge {
+  font-size: 10px;
+  color: var(--color-text-badge);
+  font-family: sans-serif;
+  line-height: 1;
+  margin-top: 1px;
+}
+
+.hl-y {
+  background: var(--color-hl-y);
+  padding: 0 3px;
+  border-radius: 2px;
+}
+.hl-p {
+  background: var(--color-hl-p);
+  padding: 0 3px;
+  border-radius: 2px;
+}
+.hl-m {
+  background: var(--color-hl-m);
+  padding: 0 3px;
+  border-radius: 2px;
+}
+
+.empty-msg {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 17px;
+  color: var(--color-text-faint);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.hl-popup {
+  position: fixed;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 6px 9px;
+  display: flex;
+  gap: 7px;
+  z-index: 300;
+  box-shadow: var(--shadow-hl-popup);
+}
+
+.hl-popup.hidden {
+  display: none;
+}
+
+.hl-dot {
+  width: 21px;
+  height: 21px;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition:
+    border-color 0.1s,
+    transform 0.1s;
+}
+
+.hl-dot:hover {
+  border-color: #555;
+  transform: scale(1.12);
+}
+
+.hl-dot.hl-y {
+  background: var(--color-hl-y-dot);
+}
+.hl-dot.hl-p {
+  background: var(--color-hl-p-dot);
+}
+.hl-dot.hl-m {
+  background: var(--color-hl-m-dot);
+}
+.hl-dot.hl-none {
+  background: #eee;
+  border: 2px solid #ccc;
+}
+
+.add-row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 9px 14px 9px var(--content-left-pad);
+  border-top: 1.5px solid var(--color-border-add);
+  position: relative;
+  z-index: 1;
+}
+
+.add-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  border-bottom: 1.5px solid var(--color-border-input);
+  outline: none;
+  font-family: "Nanum Pen Script", cursive;
+  font-size: 18px;
+  color: var(--color-text-primary);
+  padding: 2px 3px;
+}
+
+.add-input::placeholder {
+  color: var(--color-text-faint);
+}
+
+.add-btn {
+  background: var(--color-bg-binder);
+  border: none;
+  color: var(--color-text-white);
+  padding: 5px 13px;
+  border-radius: 4px;
+  font-family: "Nanum Pen Script", cursive;
+  font-size: 17px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s;
+}
+
+.add-btn:hover {
+  background: var(--color-bg-binder-hover);
+}
+
+.paper-footer {
+  text-align: right;
+  padding: 3px 16px 7px;
+  color: #c8a030;
+  opacity: 0.4;
+  font-size: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.bottom-bar {
+  background: var(--color-bg-binder);
+  padding: 10px 12px;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.bb-btn {
+  background: var(--color-bb-btn-bg);
+  border: 1px solid var(--color-bb-btn-border);
+  color: var(--color-text-white);
+  padding: 5px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: "Nanum Pen Script", cursive;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: background 0.12s;
+  white-space: nowrap;
+}
+
+.bb-btn:hover {
+  background: var(--color-bb-btn-hover);
+}
+
+.bb-btn.active {
+  background: var(--color-bb-btn-active);
+  border-color: var(--color-bb-btn-active-border);
+}
+
+.toast {
+  position: fixed;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--color-toast-bg);
+  color: var(--color-text-white);
+  padding: 8px 20px;
+  border-radius: 20px;
+  font-family: "Nanum Pen Script", cursive;
+  font-size: 15px;
+  white-space: nowrap;
+  z-index: 200;
+  transition: opacity 0.3s;
+}
+
+.toast.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.toast:not(.hidden) {
+  opacity: 1;
+}
