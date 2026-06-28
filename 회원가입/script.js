@@ -13,6 +13,8 @@ const signupData = {
   nickname: "",
 };
 
+const existingIds = ["admin", "test01", "user123", "comento"];
+
 const steps = [
   {
     title: "아이디를 입력해주세요",
@@ -173,6 +175,13 @@ function createIdContent() {
       id.length > ID_MAX_LENGTH
     ) {
       message.textContent = `영문, 숫자 ${ID_MIN_LENGTH}~${ID_MAX_LENGTH}자로 입력해주세요.`;
+      message.className = "error";
+      idChecked = false;
+      return;
+    }
+
+    if (existingIds.includes(id)) {
+      message.textContent = "이미 사용 중인 아이디입니다.";
       message.className = "error";
       idChecked = false;
       return;
